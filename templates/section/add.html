@@ -1,0 +1,72 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Add Section
+{% endblock %}
+
+{% block content %}
+<h1 class="display-1 text-center">
+    <b>
+        Add Section
+    </b>
+</h1>
+
+<hr>
+
+<form action="" method="post" class="form">
+    <div class="form-group">
+        
+        <label for="name" class="form-label">Section Name:</label>
+        <input type="text" 
+        name="name" 
+        id="name" 
+        class="form-control" 
+        required>
+
+        <label for="date" class="form-label">Date:</label>
+        <input type="date" 
+       name="date" 
+       id="date" 
+       class="form-control" 
+       required 
+       value="">
+
+        <label for="description" class="form-label">Description:</label>
+        <input type="text" 
+        name="description" 
+        id="description" 
+        class="form-control" 
+        required>
+    </div>
+    <br>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <button type="submit" class="btn btn-success btn-lg">
+            <i class="fas fa-plus    "></i>
+            Add
+        </button>
+    </div>
+</form>
+
+{% endblock %}
+
+<!-- {% block style %}
+<style>
+    .body-page{
+        margin: 0;
+        padding: 0;
+        background-image: url("../../static/bg.jpg"); /* Path to your background image */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+</style>
+{% endblock %} -->
+
+<script>
+    // Get today's date in the format YYYY-MM-DD
+    var today = new Date().toISOString().split('T')[0];
+
+    // Set the default value of the input field to today's date
+    document.getElementById('date').setAttribute('value', today);
+</script>

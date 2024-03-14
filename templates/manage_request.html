@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Manage Requests
+{% endblock %}
+
+{% block content %}
+<h2 class="display-2 text-center"><b>Issues</b></h2>
+<hr>
+<h2 class="text-center">Pending Requests</h2>
+<table class="table text-center table-dark">
+    <thead>
+        <tr class="table-dark">
+            <th>Issue ID</th>
+            <th>Student Name</th>
+            <th>Book Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for b in issues %}
+            <tr class="table-light">
+                <td>{{ b.id }}</td>
+                <td>{{ b.user.username if b.user else 'User not found' }}</td>
+                <td>{{ b.book.name if b.book else 'Book not found' }}</td>
+                <td>
+                    <form method="post" action="{{ url_for('approve_request') }}">
+                        <input type="hidden" name="request_id" value="{{ b.id }}">
+                        <button type="submit" name="action" value="accept" class="btn btn-primary">
+                            Accept
+                        </button>
+                        <button type="submit" name="action" value="decline" class="btn btn-danger">
+                            Decline
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<hr>
+
+<h2 class="text-center">Issued</h2>
+<table class="table text-center table-dark">
+    <thead>
+        <tr class="table-dark">
+            <th>Issued ID</th>
+            <th>Student Name</th>
+            <th>Current Issued Book Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for issue in issued %}
+            <tr class="table-light">
+                <td>{{ issue.id }}</td>
+                <td>{{ issue.user.username if issue.user else 'User not found' }}</td>
+                <td>{{ issue.book.name if issue.book else 'Book not found' }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

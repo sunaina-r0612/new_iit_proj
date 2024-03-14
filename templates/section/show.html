@@ -1,0 +1,81 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Books in {{section.name}}
+{% endblock %}
+
+{% block content %}
+
+<h1 class="display-1 text-center">
+    <b>
+        Section {{section.name}}
+    </b>
+</h1>
+<hr>
+<div class="heading">
+    <h2 class="text-muted text-center">
+        Books
+    </h2>
+    <div class="d-grid">
+        <a href="{{url_for('add_book', section_id=section.id)}}" class="btn btn-success btn-lg">
+            <i class="fas fa-plus    "></i>
+                Add
+        </a>
+    </div>
+</div>
+<br>
+<table class="table table-dark text-center">
+    <thead>
+        <tr class="table-dark">
+            <th>Book ID</th>
+            <th>Book Name</th>
+            <th>Author</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in section.bookname %}
+        <tr class="table-light">
+            <td>{{book.id}}</td>
+            <td>{{book.name}}</td>
+            <td>{{book.author}}</td>
+            <td>{{book.content}}</td>
+            <td>
+                <a href="{{url_for('edit_book', id=book.id)}}" class="btn btn-primary">
+                    <i class="fas fa-edit    "></i>
+                    Edit
+                </a>
+                <a href="{{url_for('delete_book', id=book.id)}}" class="btn btn-danger">
+                    <i class="fas fa-trash    "></i>
+                    Delete
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    
+{% endblock %}
+
+{% block style %}
+    <style>
+        .heading{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        body{
+            margin: 0;
+            padding: 0;
+            background-image: url("../../static/bg.jpg"); /* Path to your background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+    </style>
+{% endblock %}

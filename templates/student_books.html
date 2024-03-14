@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    MyBooks
+{% endblock %}
+
+{% block content %}
+<h2 class="display-2 text-center"><b>My Books</b></h2>
+<hr>
+<table class="table table-dark">
+    <thead>
+        <tr class="table-dark">
+            <th>Issued ID</th>
+            <th>Book Name</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for issue in issues %}
+        {% if issue.user_id == userid %}
+        <tr class="table-light">
+            <td>{{ issue.id }}</td>
+            <td>{{ issue.book.name if issue.book else 'Book not found' }}</td>
+            <td>{{ issue.book.status if issue.book else 'Status not found' }}</td>
+        </tr>        
+        {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+<hr>
+<table class="table table-dark">
+    <thead>
+        <tr class="table-dark">
+            <th>Issued ID</th>
+            <th>Book Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for issue in issued %}
+        {% if issue.user_id == userid %}
+        <tr class="table-light">
+            <td>{{ issue.id }}</td>
+            <td>{{ issue.book.name if issue.book else 'Book not found' }}</td>
+            <td>{{ issue.book.content if issue.book else 'Content not found' }}</td>
+            <td>
+                <form id="bookForm_{{ issue.id }}" method="post" action="{{ url_for('return_book') }}">
+                    <input type="hidden" name="book_id" value="{{ issue.id }}">
+                    <input type="hidden" name="status" value="Available"> <!-- Set the status value to Available -->
+                    <button type="button" class="btn btn-primary" onclick="returnBook('{{ issue.id }}', 'Available')">Return</button>
+                </form>
+            </td>
+        </tr>        
+        {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+{% block script %}
+<script>
+    function returnBook(bookId, status) {
+        var form = document.getElementById('bookForm_' + bookId);
+        form.elements["status"].value = status; // Set the status value
+        form.submit();
+    }      
+</script>
+{% endblock %}

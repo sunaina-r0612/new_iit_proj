@@ -1,0 +1,42 @@
+
+{% extends 'layout.html' %}
+
+{% block title %}
+    Delete Section
+{% endblock %}
+
+{% block content %}
+
+<h1 class="display-1 text-center">
+    <b>
+        Delete Section
+    </b>
+</h1>
+<hr>
+<p class="f-3 text-center">Are you sure you want to delete {{section.name}}?</p>
+
+<form action="" method="post" class="form">
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <button type="submit" class="btn btn-danger btn-lg">
+            <i class="fas fa-trash    "></i>
+            Delete
+        </button>
+    </div>
+</form>
+
+{% endblock %}
+
+{% block style %}
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            background-image: url("../../static/bg.jpg"); /* Path to your background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+    </style>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Add Book
+{% endblock %}
+
+{% block content %}
+
+<h1 class="display-1 text-center">
+    <b>
+        Add Book
+    </b>
+</h1>
+<hr>
+
+<form action="{{url_for('add_book_post', section_id = section.id)}}" method="post" class="form">
+    <div class="form-group">
+        <label for="name" class="form-label">Book Name:</label>
+        <input type="text" 
+        name="name" 
+        id="name" 
+        class="form-control" 
+        required>
+    </div>
+    <div class="form-group">
+        <label for="author" class="form-label">Author:</label>
+        <input type="text" 
+        name="author" 
+        id="author" 
+        class="form-control" 
+        required>
+    </div>
+    <div class="form-group">
+        <label for="content" class="form-label">Description:</label>
+        <input type="text" 
+        name="content" 
+        id="content" 
+        class="form-control" 
+        required>
+    </div>
+    <br>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <button type="submit" class="btn btn-success btn-lg">
+            <i class="fas fa-plus "></i>
+            Add
+        </button>
+    </div>
+    
+</form>
+
+{% endblock %}
+
+{% block style %}
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            background-image: url("../../static/bg.jpg"); /* Path to your background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+    </style>
+{% endblock %}
