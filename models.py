@@ -61,7 +61,7 @@ class Issued(db.Model):
 
     user = db.relationship('User', backref='issued')
     book = db.relationship('Book', backref='issued')
-    
+ 
 #craete db if doesn't exist
 with app.app_context():
     db.create_all()
