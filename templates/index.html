@@ -6,11 +6,11 @@
 
 {% block content %}
 <br>
-<form id="searchForm" class="d-flex" role="search"> <!-- Added ID to the form -->
-    <input id="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> <!-- Added ID to the input -->
+<form id="searchForm" class="d-flex" role="search">
+    <input id="searchInput" class="form-control me-2" type="search" placeholder="Search Books and Sections" aria-label="Search">
     <button class="btn btn-success" type="submit">Search</button>
 </form>
-<br>
+
 <h2 class="display-2 text-center"><b>Books</b></h2>
 <hr>
 <div class="categories-list">
@@ -48,7 +48,7 @@
                                 {% if b.status == 'Available' or b.status == 'Requested' %}
                                     <button type="button" class="btn btn-primary" onclick="requestBook('{{ b.id }}', '{{ b.status }}')" {% if b.status == 'Issued' %}disabled{% endif %}>Request</button>
                                 {% elif b.status == 'Issued' %}
-                                    <button type="button" class="btn btn-primary" onclick="returnBook('{{ b.id }}', '{{ b.status }}')">Return</button>
+                                    Check Your books 
                                 {% endif %}
                             </form>                          
                         </div>                    
@@ -103,40 +103,48 @@
         document.querySelector('#searchForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent default form submission
             var searchValue = document.querySelector('#searchInput').value.trim().toLowerCase(); // Get search input value
-            var sections = document.querySelectorAll('.section'); // Select all sections
-            
-            if (searchValue === "") {
-                sections.forEach(function(section) {
-                    section.style.display = 'block'; // Show all sections if search input is empty
-                    section.querySelectorAll('.card').forEach(function(card) {
-                        card.style.display = 'block'; // Show all books within the section
-                    });
-                });
-                return; // Exit function if search input is empty
-            }
-
-            sections.forEach(function(section) {
-                var sectionName = section.querySelector('h2').textContent.toLowerCase();
-                var sectionMatches = sectionName.includes(searchValue);
-                var books = section.querySelectorAll('.card');
-
-                if (sectionMatches) {
-                    section.style.display = 'block'; // Show section if it matches search criteria
-                } else {
-                    section.style.display = 'none'; // Hide section if it doesn't match search criteria
-                }
-
-                books.forEach(function(bookCard) {
-                    var bookName = bookCard.querySelector('.card-title').textContent.toLowerCase();
-                    var bookParent = bookCard.closest('.card');
-                    if (bookName.includes(searchValue) || sectionMatches) {
-                        bookParent.style.display = 'block'; // Show book if it matches search criteria or if its section matches
-                    } else {
-                        bookParent.style.display = 'none'; // Hide book if it doesn't match search criteria and its section doesn't match
-                    }
-                });
-            });
+            searchBooksAndSections(searchValue);
         });
     });
+    
+    function searchBooksAndSections(searchValue) {
+        var sections = document.querySelectorAll('.section'); // Select all sections
+        sections.forEach(function(section) {
+            var sectionName = section.querySelector('h2').textContent.trim().toLowerCase();
+            var sectionParent = section.closest('.section');
+            var books = section.querySelectorAll('.card'); // Select all books within this section
+            var sectionMatches = sectionName.includes(searchValue);
+            var bookFoundInSection = false;
+    
+            // Check if the section name contains a part of the search value
+            if (sectionName.includes(searchValue)) {
+                sectionMatches = true;
+    
+                // Show all books within this section
+                books.forEach(function(bookCard) {
+                    var bookParent = bookCard.closest('.card');
+                    bookParent.style.display = 'block'; // Show book
+                });
+            } else {
+                books.forEach(function(bookCard) {
+                    var bookName = bookCard.querySelector('.card-title').textContent.trim().toLowerCase();
+                    var bookParent = bookCard.closest('.card');
+                    if (bookName.includes(searchValue)) {
+                        bookParent.style.display = 'block'; // Show book if it matches search criteria
+                        bookFoundInSection = true;
+                    } else {
+                        bookParent.style.display = 'none'; // Hide book if it doesn't match search criteria
+                    }
+                });
+            }
+    
+            if (sectionMatches || bookFoundInSection) {
+                sectionParent.style.display = 'block'; // Show section if it matches search criteria or if a book is found in it
+            } else {
+                sectionParent.style.display = 'none'; // Hide section if it doesn't match search criteria and no book is found in it
+            }
+        });
+    }
+    
 </script>
 {% endblock %}
