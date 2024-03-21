@@ -6,28 +6,172 @@
 
 {% block content %}
 
-<h2 class="display-2 text-center"><b>Stats</b></h2>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">
+
+<h2 class="display-2 text-center"><b>Librarian Dashboard</b></h2>
 <hr>
-<table class="table table-dark text-center">
-    <thead>
-        <tr class="table-dark">
-            <th>Sections</th>
-            <th>No of Books</th>
-            <th>Users</th>
-            <th>Pending Requests</th>
-            <th>Issued Books</th>
-        </tr>
-    </thead>
-    <tbody>
-    <tr class="table-light">
-        <td>{{ sections|length }}</td>
-        <td>{{ book|length }}</td>
-        <td>{{ users|length - 1}}</td>
-        <td>{{ pending|length }}</td>
-        <td>{{ issued|length }}</td>
-    </tr>
-    </tbody>
-</table>
 
+<div class="main-content">
+  <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row justify-content-center">
+          <div class="col-xl-3 col-lg-6 mb-4">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Sections</h5>
+                    <span class="h2 font-weight-bold mb-0">{{ sections|length }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                      <i class="fas fa-chart-pie"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">No. of Books</h5>
+                    <span class="h2 font-weight-bold mb-0">{{ book|length }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                      <i class="fas fa-book"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Users</h5>
+                    <span class="h2 font-weight-bold mb-0">{{ users|length - 1}}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-success text-white rounded-circle shadow">
+                      <i class="fas fa-users"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Requests Pending</h5>
+                    <span class="h2 font-weight-bold mb-0">{{ pending|length }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-dark text-white rounded-circle shadow">
+                      <i class="fas fa-question"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Books Issued</h5>
+                    <span class="h2 font-weight-bold mb-0">{{ issued|length }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                      <i class="fas fa-pen"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Books allowed</h5>
+                    <span class="h2 font-weight-bold mb-0">5</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                      <i class="fas fa-book"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Librarian</h5>
+                    <span class="h2 font-weight-bold mb-0">1</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                      <i class="fas fa-user"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
 
+{% block style %}
+<style>
+
+  figcaption,
+  main {
+    display: block;
+
+  }
+  
+  main {
+    overflow: hidden;
+  }
+  
+  .icon {
+    width: 3rem;
+    height: 3rem;
+  }
+  
+  .icon i {
+    font-size: 2.25rem;
+  }
+  
+  .icon-shape {
+    display: inline-flex;
+    padding: 12px;
+    text-align: center;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
+</style>
 {% endblock %}
